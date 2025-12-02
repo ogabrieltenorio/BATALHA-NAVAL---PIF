@@ -6,16 +6,21 @@
 
 > Projeto da disciplina **Programação de Inovação e Fundamentos de Sistemas de Informação** (PIFSI 2025.2) da **CESAR School**, pelo **incrível** professor **João Victor Tinoco**.
 
+Primeiramente, de coração: 
+Professor, nós amamos ter o senhor como professor. Você é um excelente profissional, mas acima de tudo, uma excelente pessoa. Eu amei fazer parte disso com você. Obrigado por todo o apoio, obrigado por ter me feito(realmente) gostar mais de C. Espero crescer mais ao seu lado no futuro!!!!! - Gtenório
+
+
 ## 📋 Sobre o Projeto
 
 Este projeto consiste na implementação do clássico jogo **Batalha Naval** (Battleship) via interface de linha de comando (CLI).
 
-O objetivo pedagógico foi consolidar os fundamentos da programação estruturada em C, atendendo aos seguintes requisitos obrigatórios:
-* **Alocação Dinâmica de Memória** (`malloc` e `free` para criação dos tabuleiros e frotas).
-* **Estruturas de Dados** (`structs` para Jogador, Navio e Tabuleiro).
-* **Ponteiros** (passagem por referência para manipulação dos dados).
-* **Modularização** (separação em arquivos `.c` e `.h`).
-* **Validação de Entrada** (blindagem contra inputs inválidos).
+O objetivo pedagógico foi consolidar os fundamentos da programação estruturada em C, com foco em gerenciamento de memória e boas práticas de arquitetura.
+
+### ✨ Principais Funcionalidades
+* **Menu Interativo:** Opções para iniciar jogo, configurações e sair.
+* **Tabuleiro Configurável:** O tamanho do grid pode ser ajustado entre 6x6 e 26x26 (padrão 10x10).
+* **Posicionamento Flexível:** Escolha entre posicionar navios manualmente ou deixar o computador fazer isso aleatoriamente.
+* **Relatório Pós-Jogo:** Exibição de estatísticas (precisão, total de tiros) e estado final dos tabuleiros.
 
 ---
 
@@ -23,94 +28,79 @@ O objetivo pedagógico foi consolidar os fundamentos da programação estruturad
 
 | Aluno | Email | Responsabilidades |
 | :--- | :--- | :--- |
-| **Gabriel Tenório** | gtlt@cesar.school | • **Revisão de Código e Correção de Bugs**<br>• Interface (IO) e Menus<br>• Sistema de Aleatoriedade (RND)<br>• Documentação |
-| **Vinícius Cardoso** | vca4@cesar.school | • Lógica do Jogo (Game Loop)<br>• Gerenciamento de Memória (Board/Fleet)<br>• Estruturação do Main |
+| **Gabriel Tenório** | gtlt@cesar.school | • **Build System (Makefile)** e Interface<br>• Sistema de Menus e Configurações<br>• Revisão de Código e Git Flow<br>• Documentação |
+| **Vinícius Cardoso** | vca4@cesar.school | • Lógica Core do Jogo (Game Loop)<br>• Gerenciamento de Memória (Board/Fleet)<br>• Estruturação de Dados |
 
 ---
 
-## 🛠️ Tecnologias
+## 🛠️ Tecnologias e Ferramentas
 
 * **Linguagem:** C (Standard C99)
-* **Compilador:** GCC (MinGW-w64)
-* **IDE Recomendada:** VS Code
+* **Compilação:** GCC via Makefile
 * **Bibliotecas:** Apenas padrão (`stdio.h`, `stdlib.h`, `string.h`, `time.h`, `ctype.h`).
 
 ---
 
 ## 🚀 Instalação e Execução
 
-Como o projeto não utiliza ferramentas externas de build complexas, a compilação é feita diretamente via **GCC**. Siga os passos abaixo no seu terminal (VS Code, PowerShell ou CMD).
+Para facilitar a compilação, incluímos um **Makefile** que automatiza todo o processo.
 
 ### 1. Preparar o Ambiente
+Certifique-se de estar na pasta raiz do projeto (onde está este README e o arquivo Makefile).
 
-Certifique-se de estar na pasta raiz do projeto. Em seguida, entre no diretório do código-fonte:
+### 2. Compilar e Rodar (Via Makefile - Recomendado)
+Se você tiver o `make` (ou `mingw32-make` no Windows) instalado, basta rodar um único comando para compilar e iniciar o jogo automaticamente:
 
-    cd src
+```bash
+make
 
-### 2. Compilar
-
-Utilize o GCC para compilar todos os arquivos `.c` e gerar o executável (`jogo.exe`):
-
-    gcc *.c -o jogo.exe
-
-### 3. Executar
-
-Após compilar sem erros, inicie o jogo com o comando:
-
-    .\jogo.exe
-
-> **Nota:** Se precisar reiniciar o jogo do zero ou limpar o terminal, use `Ctrl + C` para parar, digite `cls` para limpar a tela e rode o executável novamente.
-
----
+```
 
 ## 🎮 Como Jogar
 
-1.  **Configuração Inicial:**
-    * Ao iniciar, insira os **apelidos** (nicknames) dos dois jogadores.
-    * O jogo gerencia automaticamente a criação dos tabuleiros 10x10.
+1.  **Menu Principal:**
+    * Escolha **(1) Novo Jogo** para começar.
+    * Escolha **(2) Configurações** para alterar o tamanho do tabuleiro (padrão 10x10).
 
-2.  **Posicionamento da Frota:**
-    * Cada jogador escolhe como posicionar seus navios:
-    * **(M)anual:** Você digita a coordenada (ex: `A0`) e orientação (`H` ou `V`).
-    * **(A)utomático:** O computador distribui os navios aleatoriamente (recomendado para testes rápidos).
+2.  **Preparação:**
+    * Insira os apelidos dos jogadores.
+    * Escolha o posicionamento da frota: **(M)anual** (você digita coordenadas) ou **(A)utomático** (aleatório).
 
 3.  **O Combate:**
-    * Os turnos são alternados.
-    * O jogador vê o **Mapa de Tiros** (tabuleiro inimigo sem os navios) e sua própria **Frota**.
-    * Digite a coordenada do ataque (ex: `B5`, `A9`).
-    * O jogo informa se foi **ÁGUA**, **ACERTOU** ou se um navio foi **AFUNDADO**.
+    * Os turnos são alternados. O jogador vê o tabuleiro inimigo (sem navios) e sua própria frota.
+    * Digite a coordenada do ataque (ex: `B5`).
+    * O jogo informa: **ÁGUA**, **ACERTOU** ou **AFUNDOU**.
 
-4.  **Vitória:**
-    * O jogo termina imediatamente quando um jogador afunda todos os navios do oponente.
-
-### ⚓ A Frota
-
-Cada jogador comanda a seguinte frota (baseada nas regras clássicas):
-
-| Qtd | Navio | Tamanho |
-| :---: | :--- | :---: |
-| 1 | **Porta-aviões** | 5 células |
-| 1 | **Encouraçado** | 4 células |
-| 2 | **Cruzadores** | 3 células |
-| 2 | **Destroyers** | 2 células |
+4.  **Vitória e Stats:**
+    * O jogo termina quando todos os navios de um oponente forem afundados.
+    * Ao final, são exibidas a **precisão de tiro (%)** e o número total de turnos.
 
 ---
 
-## 🏗️ Estrutura do Código
+## 🧠 Decisões de Design
 
-O projeto foi dividido em módulos para facilitar a manutenção e leitura:
+Seguindo os requisitos do projeto, adotamos as seguintes estratégias de implementação:
+
+* **Modularização:** O código foi separado em módulos lógicos (`board`, `fleet`, `game`, `io`, `rnd`) para respeitar o princípio de responsabilidade única e facilitar a manutenção.
+* **Alocação Dinâmica:** As matrizes dos tabuleiros (`Board`) e os vetores de navios (`Fleet`) são alocados dinamicamente com `malloc` baseados no tamanho configurado pelo usuário. Toda memória é liberada com `free` ao final da execução.
+* **Structs e Ponteiros:** Utilizamos `structs` para agrupar dados relacionados (como o estado do jogador na struct `Player`) e passamos essas estruturas via ponteiros para evitar cópias desnecessárias de memória durante as chamadas de função.
+* **Encapsulamento de IO:** Todas as operações de entrada e saída (printf/scanf) foram concentradas no módulo `io.c`, mantendo a lógica do jogo (`game.c`) limpa e focada nas regras de negócio.
+
+---
+
+## 🏗️ Estrutura de Arquivos
 
 ```text
 📁 pif-naval-c-main
 │
-├── 📄 README.md        # Este arquivo
+├── 📄 Makefile         # Script de automação de build
+├── 📄 README.md        # Documentação do projeto
+├── 📄 LICENSE          # Licença MIT
 │
 └── 📁 src              # Código Fonte
-    ├── main.c          # Loop principal e setup inicial
-    ├── game.c/h        # Regras de negócio (vitória, validação de tiro)
-    ├── board.c/h       # Alocação da matriz e manipulação de células
-    ├── fleet.c/h       # Definição dos navios e controle de dano
-    ├── io.c/h          # Interface com usuário (printf/scanf e displays)
-    └── rnd.c/h         # Wrapper para geração de números aleatórios
-
-Professor, se o senhor leu até aqui, saiba que nós amamos ter o senhor como professor. Você é um excelente profissional, mas acima de tudo, uma excelente pessoa. Eu amei fazer parte disso com você. Obrigado por todo o apoio, obrigado por ter me feito(realmente) gostar mais de C. Espero crescer mais ao seu lado no futuro!!!!! - Gtenório
+    ├── main.c          # Ponto de entrada e Menu Principal
+    ├── game.c/h        # Lógica de turnos, validação e estatísticas
+    ├── board.c/h       # Alocação de matriz e manipulação de células
+    ├── fleet.c/h       # Definição de navios e frota
+    ├── io.c/h          # Interface de usuário (Inputs e Displays)
+    └── rnd.c/h         # Gerador de aleatoriedade
