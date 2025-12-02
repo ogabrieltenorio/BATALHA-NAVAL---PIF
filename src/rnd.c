@@ -20,4 +20,4 @@ Orientation random_orientation() {
         return ORIENT_V;
     }
 }
-}
+
